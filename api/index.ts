@@ -1,4 +1,19 @@
-import { createApp } from "../server/src/app.js";
-import { memoryStore } from "../server/src/store-memory.js";
+import type { VercelRequest, VercelResponse } from "@vercel/node";
+import type { Express } from "express";
 
-export default createApp(memoryStore);
+let appPromise: Promise<Express> | null = null;
+
+async function getApp() {
+  if (!appPromise) {
+    appPromise = Promise.all([
+      import("../server/src/app.js"),
+      import("../server/src/store-memory.js"),
+    ]).then(([{ createApp }, { memoryStore }]) => createApp(memoryStore));
+  }
+  return appPromise;
+}
+
+export default async function handler(req: VercelRequest, res: VercelResponse) {
+  const app = await getApp();
+  return app(req, res);
+}
