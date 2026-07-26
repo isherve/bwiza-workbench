@@ -3,13 +3,13 @@ import express from "express";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { v4 as uuid } from "uuid";
-import { store } from "./store.js";
+import type { Store } from "./store-types.js";
 import { enhanceNoteWithLlm, runTriage } from "./triage.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const clientDist = path.join(__dirname, "..", "..", "client", "dist");
 
-export function createApp() {
+export function createApp(store: Store) {
   const app = express();
   const CLIENT_ORIGIN = process.env.CLIENT_ORIGIN ?? "http://localhost:5174";
   const isProduction = process.env.NODE_ENV === "production";
