@@ -8,7 +8,7 @@
 
 | Resource | URL |
 |----------|-----|
-| Live demo | https://bwiza-workbench.onrender.com |
+| Live demo | https://bwiza-workbench.vercel.app |
 | GitHub | https://github.com/isherve/bwiza-workbench |
 | Challenge hub | https://aibuilderschallenge-bobhub.bemyapp.com/ |
 | Event page | https://aibuilderschallenge-bob.bemyapp.com/ |
